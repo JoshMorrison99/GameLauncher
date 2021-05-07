@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>C:/Users/joshm/OneDrive/Desktop/background.png</file>
+    </qresource>
+    <qresource prefix="/files">
+        <file>C:/Users/joshm/OneDrive/Desktop/data.json</file>
+    </qresource>
+</RCC>
