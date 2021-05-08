@@ -10,6 +10,8 @@
 #include <QUrl>
 #include <QSettings>
 
+#define COMPANY "Shelledware"
+#define APPLICATION "Prime Pianist"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameLauncher; }
@@ -26,26 +28,48 @@ public:
 
 private slots:
     void on_play_update_button_clicked();
+    void GameDownloadFinished(QNetworkReply *reply);
+    void GameVersionDownloadFinished(QNetworkReply *reply);
 
-    void finished(QNetworkReply *reply);
+
+
 
 
 private:
     Ui::GameLauncher *ui;
-    QStringList parseVersionString(QString version);
-    bool isVersionDownloadedNewer();
-    void getNewerGameVersion();
-    void updateDownloadUpdateButtonGUI();
-    void loadSettings();
-    void saveVersionInSetting();
-    void isFirstInstall();
-    void getVersionOfGameOnWebsite();
-    void updateVersionNumberGUI();
-    QNetworkAccessManager manager;
-    QString versionDownload;
-    QString versionSystem;
-    QString urlToVersion;
-    QString urlToGame;
 
+    // Helper Functions
+    QStringList ParseVersionString(QString version);
+
+    // First Install Logic
+    bool isFirstInstall();
+    void SetupFirstInstall();
+
+    // Game Install Logic
+    void GetVersionOfGameOnWebsite();
+    void UpdateVersionNumberGUI();
+    void GetNewerGameVersion();
+    bool isGameVersionDownloadedNewer();
+
+
+    // Launcher Install Logic
+
+    // GUI Logic
+    void UpdateDownloadUpdateButtonGUI();
+
+    // Settings Logic
+    void LoadSettings();
+    void SaveGameVersionInSetting();
+
+    // Variables
+    QNetworkAccessManager manager;
+    QString gameVersionDownload;
+    QString gameVersionSystem;
+    QString launcherVersionDownload;
+    QString launcherVersionSystem;
+    QString urlToGameVersion;
+    QString urlToLauncherVersion;
+    QString urlToGame;
+    QString urlToLauncher;
 };
 #endif // GAMELAUNCHER_H
