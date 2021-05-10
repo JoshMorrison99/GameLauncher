@@ -30,9 +30,12 @@ private slots:
     void on_play_update_button_clicked();
     void GameDownloadFinished(QNetworkReply *reply);
     void GameVersionDownloadFinished(QNetworkReply *reply);
+    void LauncherVersionDownloadFinished(QNetworkReply *reply);
+    void isGameVersionDownloadedNewer();
 
 
-
+signals:
+    void GameVersionDownloaded();
 
 
 private:
@@ -43,19 +46,23 @@ private:
 
     // First Install Logic
     bool isFirstInstall();
-    void SetupFirstInstall();
+    void FetchGameVersionNumberFromWebsite();
+    void FetchLauncherVersionNumberFromWebsite();
 
     // Game Install Logic
-    void GetVersionOfGameOnWebsite();
-    void UpdateVersionNumberGUI();
+    QString GetVersionOfGameOnWebsite();
+
     void GetNewerGameVersion();
-    bool isGameVersionDownloadedNewer();
+
 
 
     // Launcher Install Logic
+    QString GetVersionOfLauncherOnWebsite();
 
     // GUI Logic
     void UpdateDownloadUpdateButtonGUI();
+    void SetGameVersionNumberGUI();
+    void SetLauncherVersionNumberGUI();
 
     // Settings Logic
     void LoadSettings();
@@ -71,5 +78,6 @@ private:
     QString urlToLauncherVersion;
     QString urlToGame;
     QString urlToLauncher;
+    bool isDownloadedVersionNewer;
 };
 #endif // GAMELAUNCHER_H
