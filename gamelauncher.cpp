@@ -9,31 +9,17 @@ GameLauncher::GameLauncher(QWidget *parent)
 
     LoadSettings();
 
-    FetchGameVersionNumberFromWebsite();
-    connect(this, &GameLauncher::GameVersionDownloaded, this, &GameLauncher::isGameVersionDownloadedNewer);
-
-//    //debug
-//    gameVersionSystem = "0.0.0";
-//    QSettings settings(COMPANY, APPLICATION);
-//    settings.setValue("version_game", gameVersionSystem);
-//    SetVersionNumberGUI();
+    // Update the launcher first
+    FetchLauncherVersionNumberFromWebsite();
 
 
-//    GetVersionOfGameOnWebsite();
 
-//    SetVersionNumberGUI();
 }
 
 GameLauncher::~GameLauncher()
 {
     delete ui;
 }
-
-
-
-
-
-
 
 void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
 {
@@ -107,6 +93,57 @@ void GameLauncher::isGameVersionDownloadedNewer()
     return;
 }
 
+void GameLauncher::isLauncherVersionDownloadedNewer()
+{
+    qInfo() << "isLauncherVersionDownloadedNewer";
+    qInfo() << launcherVersionDownload;
+    qInfo() << launcherVersionSystem;
+    QStringList versionDownloadList = ParseVersionString(launcherVersionDownload);
+    int majorNumberDownloaded = versionDownloadList[0].toInt();
+    int minorNumberDownloaded = versionDownloadList[1].toInt();
+    int subMijorNumberDownloaded = versionDownloadList[2].toInt();
+
+    QStringList versionSystemList = ParseVersionString(launcherVersionSystem);
+    int majorNumberSystem = versionSystemList[0].toInt();
+    int minorNumberSystem = versionSystemList[1].toInt();
+    int subMijorNumberSystem = versionSystemList[2].toInt();
+
+    qInfo() << majorNumberDownloaded << "   " << majorNumberSystem;
+    qInfo() << minorNumberDownloaded << "   " << minorNumberSystem;
+    qInfo() << subMijorNumberDownloaded << "   " << subMijorNumberSystem;
+
+    // Check if version number downloaded from website is different than the verison number in QSettings
+    if(majorNumberDownloaded == majorNumberSystem && minorNumberDownloaded == minorNumberSystem && subMijorNumberDownloaded == subMijorNumberSystem)
+    {
+        qInfo() << "Launcher doesn't need to be updated";
+        ContinueToGame();
+    }
+    qInfo() << "Launcher needs to be updated";
+    connect(&updateWindow, SIGNAL(UserCancelUpdate()), this, SLOT(ContinueToGame()));
+    connect(&updateWindow, SIGNAL(OK()), this, SLOT(UpdateLauncher()));
+    isDownloadedVersionLauncherNewer = true;
+    UpdateLauncherPrompt();
+    return;
+}
+
+void GameLauncher::ContinueToGame()
+{
+    qInfo() << "User doesn't want to update the launcher or launcher doesn't need to be updated";
+    isDownloadedVersionLauncherNewer = false;
+
+    // set the gui
+    SetLauncherVersionNumberGUI();
+
+    // Update the game if the launcher doesn't need to be updated or user doesn't want to update it
+    FetchGameVersionNumberFromWebsite();
+    connect(this, &GameLauncher::GameVersionDownloaded, this, &GameLauncher::isGameVersionDownloadedNewer);
+}
+
+void GameLauncher::UpdateLauncher()
+{
+
+}
+
 void GameLauncher::GetNewerGameVersion()
 {
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameDownloadFinished);
@@ -134,9 +171,15 @@ void GameLauncher::LoadSettings()
     qInfo() << "loadSettings";
     QSettings settings(COMPANY, APPLICATION);
 
+    // GAME
     settings.setValue("version_game", "0.0.0"); //DEBUGGIN
     gameVersionSystem = settings.value("version_game").toString();
     ui->versionGameLabel->setText(settings.value("version_game").toString());
+
+    // LAUNCHER
+    settings.setValue("version_launcher", "0.0.0"); //DEBUGGIN
+    launcherVersionSystem = settings.value("version_launcher").toString();
+    ui->versionLauncherNumber->setText(settings.value("version_launcher").toString());
 }
 
 void GameLauncher::SaveGameVersionInSetting()
@@ -145,12 +188,6 @@ void GameLauncher::SaveGameVersionInSetting()
     QSettings settings(COMPANY, APPLICATION);
     settings.setValue("version_game", gameVersionDownload);
 }
-
-
-
-
-
-
 
 void GameLauncher::on_play_update_button_clicked()
 {
@@ -163,23 +200,16 @@ void GameLauncher::on_play_update_button_clicked()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Set the game and launcher versions to the same as the version on the website
 void GameLauncher::FetchGameVersionNumberFromWebsite()
 {
+    qInfo() << "FetchGameVersionNumberFromWebsite";
+    qInfo() << &manager;
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameVersionDownloadFinished);
     urlToGameVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_game.txt";
-    manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGameVersion)));
+    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGameVersion)));
+    qInfo() << &manager;
+    qInfo() << reply->error();
 }
 
 void GameLauncher::GameVersionDownloadFinished(QNetworkReply *reply)
@@ -189,7 +219,7 @@ void GameLauncher::GameVersionDownloadFinished(QNetworkReply *reply)
     QSettings settings(COMPANY, APPLICATION);
     qInfo() << "Game Version: " << gameVersionDownload;
     //settings.setValue("version_game", GetVersionOfGameOnWebsite());
-    SetGameVersionNumberGUI();
+    //SetGameVersionNumberGUI();
 
 
     disconnect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameVersionDownloadFinished);
@@ -202,18 +232,6 @@ QString GameLauncher::GetVersionOfGameOnWebsite()
     qInfo() << "GetVersionOfGameOnWebsite";
     return gameVersionDownload;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 void GameLauncher::FetchLauncherVersionNumberFromWebsite()
@@ -229,6 +247,15 @@ QString GameLauncher::GetVersionOfLauncherOnWebsite()
     return launcherVersionDownload;
 }
 
+void GameLauncher::UpdateLauncherPrompt()
+{
+    qInfo() << "Update Launcher";
+    // TODO: Add a prompt that the user can choose to update the launcher or not
+
+    updateWindow.setModal(true);
+    updateWindow.exec();
+}
+
 
 
 void GameLauncher::LauncherVersionDownloadFinished(QNetworkReply *reply)
@@ -237,12 +264,12 @@ void GameLauncher::LauncherVersionDownloadFinished(QNetworkReply *reply)
     launcherVersionDownload = reply->readAll();
     QSettings settings(COMPANY, APPLICATION);
     qInfo() << "Launcher Version: " << launcherVersionDownload;
-    settings.setValue("version_launcher", GetVersionOfLauncherOnWebsite());
-    SetLauncherVersionNumberGUI();
+    //settings.setValue("version_launcher", GetVersionOfLauncherOnWebsite());
+    //SetLauncherVersionNumberGUI();
 
     disconnect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherVersionDownloadFinished);
 
-    isGameVersionDownloadedNewer();
+    isLauncherVersionDownloadedNewer();
 }
 
 bool GameLauncher::isFirstInstall()

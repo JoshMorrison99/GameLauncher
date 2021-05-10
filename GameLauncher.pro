@@ -12,13 +12,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    gamelauncher.cpp
+    gamelauncher.cpp \
+    update.cpp
 
 HEADERS += \
-    gamelauncher.h
+    gamelauncher.h \
+    update.h
 
 FORMS += \
-    gamelauncher.ui
+    gamelauncher.ui \
+    update.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

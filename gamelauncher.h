@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QUrl>
 #include <QSettings>
+#include <update.h>
 
 #define COMPANY "Shelledware"
 #define APPLICATION "Prime Pianist"
@@ -26,12 +27,15 @@ public:
     ~GameLauncher();
 
 
-private slots:
+public slots:
     void on_play_update_button_clicked();
     void GameDownloadFinished(QNetworkReply *reply);
     void GameVersionDownloadFinished(QNetworkReply *reply);
     void LauncherVersionDownloadFinished(QNetworkReply *reply);
     void isGameVersionDownloadedNewer();
+    void isLauncherVersionDownloadedNewer();
+    void ContinueToGame();
+    void UpdateLauncher();
 
 
 signals:
@@ -58,6 +62,7 @@ private:
 
     // Launcher Install Logic
     QString GetVersionOfLauncherOnWebsite();
+    void UpdateLauncherPrompt();
 
     // GUI Logic
     void UpdateDownloadUpdateButtonGUI();
@@ -70,6 +75,7 @@ private:
 
     // Variables
     QNetworkAccessManager manager;
+    Update updateWindow;
     QString gameVersionDownload;
     QString gameVersionSystem;
     QString launcherVersionDownload;
@@ -79,5 +85,6 @@ private:
     QString urlToGame;
     QString urlToLauncher;
     bool isDownloadedVersionNewer;
+    bool isDownloadedVersionLauncherNewer;
 };
 #endif // GAMELAUNCHER_H
