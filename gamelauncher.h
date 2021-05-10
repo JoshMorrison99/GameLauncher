@@ -9,6 +9,9 @@
 #include <QDebug>
 #include <QUrl>
 #include <QSettings>
+#include <QApplication>
+#include <QProcess>
+
 #include <update.h>
 
 #define COMPANY "Shelledware"
@@ -32,6 +35,7 @@ public slots:
     void GameDownloadFinished(QNetworkReply *reply);
     void GameVersionDownloadFinished(QNetworkReply *reply);
     void LauncherVersionDownloadFinished(QNetworkReply *reply);
+    void LauncherDownloadFinished(QNetworkReply *reply);
     void isGameVersionDownloadedNewer();
     void isLauncherVersionDownloadedNewer();
     void ContinueToGame();
@@ -72,6 +76,7 @@ private:
     // Settings Logic
     void LoadSettings();
     void SaveGameVersionInSetting();
+    void SaveLauncherVersionInSetting();
 
     // Variables
     QNetworkAccessManager manager;

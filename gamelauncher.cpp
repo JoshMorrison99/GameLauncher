@@ -117,6 +117,7 @@ void GameLauncher::isLauncherVersionDownloadedNewer()
     {
         qInfo() << "Launcher doesn't need to be updated";
         ContinueToGame();
+        return;
     }
     qInfo() << "Launcher needs to be updated";
     connect(&updateWindow, SIGNAL(UserCancelUpdate()), this, SLOT(ContinueToGame()));
@@ -141,7 +142,43 @@ void GameLauncher::ContinueToGame()
 
 void GameLauncher::UpdateLauncher()
 {
+    connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherDownloadFinished);
+    // download the updated launcher
+    urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/Launcher.exe";
+    manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGame)));
 
+    // restart the application
+}
+
+void GameLauncher::LauncherDownloadFinished(QNetworkReply *reply)
+{
+    qInfo() << "LauncherDownloadFinished";
+    qInfo() << reply->readAll();
+    // Download the new version UnityGame.exe to tempGame.exe
+    QByteArray newLauncherDownloadRaw = reply->readAll();
+    QFile newLauncherDownloadFile = QFile("Launcher.exe");
+    newLauncherDownloadFile.open(QIODevice::WriteOnly);
+    newLauncherDownloadFile.write(newLauncherDownloadRaw);
+    newLauncherDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempLauncher.exe");
+
+    // rename Launcher.exe to oldLauncher.exe
+    QFile oldLauncherFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/Launcher.exe");
+    oldLauncherFile.open(QIODevice::WriteOnly);
+    oldLauncherFile.rename("C:/Users/joshm/OneDrive/Desktop/User/oldLauncher.exe");
+
+    // rename tempLauncher.exe to Launcher.exe
+    newLauncherDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/Launcher.exe");
+
+    // update settings for currently installed launcher version
+    SaveLauncherVersionInSetting();
+
+    // update version gui
+    SetLauncherVersionNumberGUI();
+    isDownloadedVersionLauncherNewer = false;
+
+    // restart application
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }
 
 void GameLauncher::GetNewerGameVersion()
@@ -172,12 +209,12 @@ void GameLauncher::LoadSettings()
     QSettings settings(COMPANY, APPLICATION);
 
     // GAME
-    settings.setValue("version_game", "0.0.0"); //DEBUGGIN
+    //settings.setValue("version_game", "0.0.0"); //DEBUGGIN
     gameVersionSystem = settings.value("version_game").toString();
     ui->versionGameLabel->setText(settings.value("version_game").toString());
 
     // LAUNCHER
-    settings.setValue("version_launcher", "0.0.0"); //DEBUGGIN
+    //settings.setValue("version_launcher", "0.0.0"); //DEBUGGIN
     launcherVersionSystem = settings.value("version_launcher").toString();
     ui->versionLauncherNumber->setText(settings.value("version_launcher").toString());
 }
@@ -187,6 +224,13 @@ void GameLauncher::SaveGameVersionInSetting()
     qInfo() << "saveVersionInSetting";
     QSettings settings(COMPANY, APPLICATION);
     settings.setValue("version_game", gameVersionDownload);
+}
+
+void GameLauncher::SaveLauncherVersionInSetting()
+{
+    qInfo() << "SaveLauncherVersionInSetting";
+    QSettings settings(COMPANY, APPLICATION);
+    settings.setValue("version_launcher", launcherVersionDownload);
 }
 
 void GameLauncher::on_play_update_button_clicked()
@@ -271,6 +315,8 @@ void GameLauncher::LauncherVersionDownloadFinished(QNetworkReply *reply)
 
     isLauncherVersionDownloadedNewer();
 }
+
+
 
 bool GameLauncher::isFirstInstall()
 {
