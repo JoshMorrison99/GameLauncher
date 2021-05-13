@@ -11,6 +11,7 @@
 #include <QSettings>
 #include <QApplication>
 #include <QProcess>
+#include <QDesktopServices>
 
 #include <update.h>
 

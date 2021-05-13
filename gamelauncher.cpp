@@ -6,6 +6,7 @@ GameLauncher::GameLauncher(QWidget *parent)
     , ui(new Ui::GameLauncher)
 {
     ui->setupUi(this);
+    this->setFixedSize(QSize(1280, 680));
 
     LoadSettings();
 
@@ -240,6 +241,7 @@ void GameLauncher::on_play_update_button_clicked()
         GetNewerGameVersion();
     }else{
         // Boot up the unity game
+        QDesktopServices::openUrl(QUrl("file:///E:/PrimePianistBuilds/New Unity Project.exe"));
     }
 }
 

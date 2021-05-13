@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>680</height>
+    <height>672</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,36 +30,36 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="sidebar">
+   <widget class="QLabel" name="TopBar">
     <property name="geometry">
      <rect>
       <x>-10</x>
-      <y>-30</y>
-      <width>281</width>
-      <height>701</height>
+      <y>-20</y>
+      <width>1301</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;</string>
+     <string notr="true">background-color: rgba(0,0,0,50);</string>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="image">
+   <widget class="QLabel" name="image_background">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>0</x>
       <y>0</y>
-      <width>1011</width>
-      <height>481</height>
+      <width>1281</width>
+      <height>671</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/C:/Users/joshm/OneDrive/Desktop/background.png</pixmap>
+     <pixmap resource="resources.qrc">:/images/C:/Users/joshm/OneDrive/Desktop/bg.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -68,20 +68,22 @@
    <widget class="QPushButton" name="play_update_button">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>530</y>
+      <x>970</x>
+      <y>560</y>
       <width>231</width>
-      <height>71</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>18</pointsize>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
-     background-color: #85ebd9;
+     background-color: rgba(255,255,255,220);
      border-radius: 5px;
 	color: black;
 }
@@ -91,50 +93,11 @@
      <string>Play</string>
     </property>
    </widget>
-   <widget class="QLabel" name="versionLauncherLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>590</y>
-      <width>51</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>7</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #424242</string>
-    </property>
-    <property name="text">
-     <string>VERSION</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="versionLauncherContainer">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>572</y>
-      <width>271</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #101010;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="versionLauncherNumber">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>610</y>
+      <x>10</x>
+      <y>650</y>
       <width>47</width>
       <height>13</height>
      </rect>
@@ -142,8 +105,8 @@
     <property name="font">
      <font>
       <pointsize>8</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -153,63 +116,421 @@
      <string>1.0.0</string>
     </property>
    </widget>
-   <widget class="QLabel" name="title">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>18</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #e0e0e0;</string>
-    </property>
-    <property name="text">
-     <string>Prime Piano</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="versionGameLabel">
     <property name="geometry">
      <rect>
-      <x>1060</x>
-      <y>500</y>
-      <width>47</width>
-      <height>13</height>
+      <x>970</x>
+      <y>630</y>
+      <width>231</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgba(0,0,0,50);</string>
     </property>
     <property name="text">
      <string>0.0.69</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>390</y>
+      <width>1291</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="bottomBar_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(0,0,0,100);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="bottomBar">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(0,0,0,240);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>440</y>
+      <width>516</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>70</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="websiteButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string>   Website</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/home.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/home.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="supportBtn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string>   Support</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/support.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/support.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="supportBtn_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string>   Update Logs</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/logs.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/logs.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>440</y>
+      <width>321</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="websiteButton_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/discord.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/discord.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="supportBtn_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/instagram.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/instagram.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="supportBtn_4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/youtube.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/youtube.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="supportBtn_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+background-color: rgba(0,0,0,0);
+border: 0px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/twitter.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/twitter.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>590</y>
+      <width>891</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: #05B8CC;
+    width: 20px;
+	margin: 0.5px;
+}</string>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
    </widget>
    <zorder>background</zorder>
-   <zorder>sidebar</zorder>
-   <zorder>image</zorder>
+   <zorder>image_background</zorder>
+   <zorder>TopBar</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>horizontalLayoutWidget_2</zorder>
+   <zorder>horizontalLayoutWidget_3</zorder>
    <zorder>play_update_button</zorder>
-   <zorder>versionLauncherContainer</zorder>
-   <zorder>versionLauncherLabel</zorder>
    <zorder>versionLauncherNumber</zorder>
-   <zorder>title</zorder>
+   <zorder>progressBar</zorder>
    <zorder>versionGameLabel</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1280</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="resources.qrc"/>

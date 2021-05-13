@@ -1,6 +1,17 @@
 <RCC>
     <qresource prefix="/images">
         <file>C:/Users/joshm/OneDrive/Desktop/background.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/bg.jpg</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/home.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/discord.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/instagram.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/logs.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/support.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/twitter.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/youtube.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/close.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/minimize.png</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/settings.png</file>
     </qresource>
     <qresource prefix="/files">
         <file>C:/Users/joshm/OneDrive/Desktop/data.json</file>
