@@ -47,6 +47,15 @@ signals:
     void GameVersionDownloaded();
 
 
+private slots:
+    void on_youtube_clicked();
+
+    void on_discord_clicked();
+
+    void on_instagram_clicked();
+
+    void on_twitter_clicked();
+
 private:
     Ui::GameLauncher *ui;
 

@@ -201,6 +201,10 @@ void GameLauncher::UpdateDownloadUpdateButtonGUI()
     else
     {
         ui->play_update_button->setText("Play");
+        ui->progressBar->hide();
+        ui->play_update_button->resize(ui->play_update_button->width() * 2, ui->play_update_button->height());
+        ui->play_update_button->move((this->width() / 2 - ui->play_update_button->width() / 2) , ui->play_update_button->y());
+
     }
 }
 
@@ -350,5 +354,22 @@ void GameLauncher::SetLauncherVersionNumberGUI()
 
 
 
+void GameLauncher::on_youtube_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://www.youtube.com/channel/UCDj-K11fBHMZB7w31T3X08A"));
+}
 
+void GameLauncher::on_discord_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://discord.gg/EuesAp9c"));
+}
 
+void GameLauncher::on_instagram_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://www.instagram.com/primepianist/"));
+}
+
+void GameLauncher::on_twitter_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://twitter.com/PianistPrime"));
+}
