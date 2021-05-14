@@ -41,6 +41,7 @@ public slots:
     void isLauncherVersionDownloadedNewer();
     void ContinueToGame();
     void UpdateLauncher();
+    void GameDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 
 signals:

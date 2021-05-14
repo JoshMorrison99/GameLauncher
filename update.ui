@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Launcher Update</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/icon_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/icon_00000.png</iconset>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -29,25 +33,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>401</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Launcher Update</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="LauncherMiddle">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -61,6 +47,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;</string>
+   </property>
    <property name="text">
     <string>A new version of the launcher is avaliable.</string>
    </property>
@@ -68,8 +57,29 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="background">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>-10</y>
+     <width>421</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: qlineargradient(spread:pad, x1: 0, y1: 0, x2: 0, y2: 1, stop:0 rgba(0, 0, 0, 200), stop:1 rgba(0, 0, 0, 255));</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>background</zorder>
+  <zorder>buttonBox</zorder>
+  <zorder>LauncherMiddle</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

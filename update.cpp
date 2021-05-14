@@ -6,6 +6,7 @@ Update::Update(QWidget *parent) :
     ui(new Ui::Update)
 {
     ui->setupUi(this);
+    this->setFixedSize(QSize(400, 300));
 }
 
 Update::~Update()

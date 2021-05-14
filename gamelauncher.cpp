@@ -151,6 +151,13 @@ void GameLauncher::UpdateLauncher()
     // restart the application
 }
 
+void GameLauncher::GameDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+    qInfo() << "GameDownloadProgress";
+    qInfo() << "bytesReceived " + QString::number(bytesReceived);
+    qInfo() << "bytesTotal " + QString::number(bytesTotal);
+}
+
 void GameLauncher::LauncherDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "LauncherDownloadFinished";
@@ -188,7 +195,8 @@ void GameLauncher::GetNewerGameVersion()
 
     // Download the actual unity game
     urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/UnityGame.exe";
-    manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGame)));
+    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGame)));
+    connect(reply, &QNetworkReply::downloadProgress, this, &GameLauncher::GameDownloadProgress);
 }
 
 void GameLauncher::UpdateDownloadUpdateButtonGUI()
@@ -197,6 +205,7 @@ void GameLauncher::UpdateDownloadUpdateButtonGUI()
     if(isDownloadedVersionNewer)
     {
         ui->play_update_button->setText("Update");
+        ui->progressBar->setValue(0);
     }
     else
     {
