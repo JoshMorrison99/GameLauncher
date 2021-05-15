@@ -13,6 +13,7 @@
 #include <QProcess>
 #include <QDesktopServices>
 
+
 #include <update.h>
 
 #define COMPANY "Shelledware"
@@ -42,6 +43,7 @@ public slots:
     void ContinueToGame();
     void UpdateLauncher();
     void GameDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void LauncherDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 
 signals:

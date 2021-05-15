@@ -25,13 +25,13 @@ GameLauncher::~GameLauncher()
 void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "GameDownloadFinished";
-    qInfo() << reply->readAll();
+    //qInfo() << reply->readAll();
     // Download the new version UnityGame.exe to tempGame.exe
     QByteArray newGameDownloadRaw = reply->readAll();
-    QFile newGameDownloadFile = QFile("UnityGame.exe");
+    QFile newGameDownloadFile = QFile("UnityGame.zip");
     newGameDownloadFile.open(QIODevice::WriteOnly);
     newGameDownloadFile.write(newGameDownloadRaw);
-    newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempGame.exe");
+    newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempGame.zip");
 
     // rename UnityGame.exe to oldGame.exe
     QFile oldGameFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.exe");
@@ -39,7 +39,7 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     oldGameFile.rename("C:/Users/joshm/OneDrive/Desktop/User/oldGame.exe");
 
     // rename tempGame.exe to UnityGame.exe
-    newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.exe");
+    newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.zip");
 
     // delete oldGame.exe version
     oldGameFile.remove();
@@ -145,8 +145,12 @@ void GameLauncher::UpdateLauncher()
 {
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherDownloadFinished);
     // download the updated launcher
-    urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/Launcher.exe";
-    manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGame)));
+    //urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/Launcher.exe";
+    urlToGame = "http://localhost:5000/api/download_launcher";
+    QNetworkRequest request = QNetworkRequest(QUrl(urlToGame));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
+    QNetworkReply *reply = manager.get(request);
+    connect(reply, &QNetworkReply::downloadProgress, this, &GameLauncher::LauncherDownloadProgress);
 
     // restart the application
 }
@@ -156,12 +160,20 @@ void GameLauncher::GameDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
     qInfo() << "GameDownloadProgress";
     qInfo() << "bytesReceived " + QString::number(bytesReceived);
     qInfo() << "bytesTotal " + QString::number(bytesTotal);
+    ui->progressBar->setValue(bytesReceived/bytesTotal);
+}
+
+void GameLauncher::LauncherDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+    qInfo() << "GameDownloadProgress";
+    qInfo() << "bytesReceived " + QString::number(bytesReceived);
+    qInfo() << "bytesTotal " + QString::number(bytesTotal);
 }
 
 void GameLauncher::LauncherDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "LauncherDownloadFinished";
-    qInfo() << reply->readAll();
+    //qInfo() << reply->readAll();
     // Download the new version UnityGame.exe to tempGame.exe
     QByteArray newLauncherDownloadRaw = reply->readAll();
     QFile newLauncherDownloadFile = QFile("Launcher.exe");
@@ -194,8 +206,11 @@ void GameLauncher::GetNewerGameVersion()
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameDownloadFinished);
 
     // Download the actual unity game
-    urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/UnityGame.exe";
-    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGame)));
+    //urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/UnityGame.exe";
+    urlToGame = "http://localhost:5000/api/download_game";
+    QNetworkRequest request = QNetworkRequest(QUrl(urlToGame));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
+    QNetworkReply *reply = manager.get(request);
     connect(reply, &QNetworkReply::downloadProgress, this, &GameLauncher::GameDownloadProgress);
 }
 
@@ -265,8 +280,9 @@ void GameLauncher::FetchGameVersionNumberFromWebsite()
     qInfo() << "FetchGameVersionNumberFromWebsite";
     qInfo() << &manager;
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameVersionDownloadFinished);
-    urlToGameVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_game.txt";
-    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToGameVersion)));
+    //urlToGameVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_game.txt";
+    urlToGameVersion = "http://localhost:5000/api/version_game";
+    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(urlToGameVersion)));
     qInfo() << &manager;
     qInfo() << reply->error();
 }
@@ -296,8 +312,9 @@ QString GameLauncher::GetVersionOfGameOnWebsite()
 void GameLauncher::FetchLauncherVersionNumberFromWebsite()
 {
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherVersionDownloadFinished);
-    urlToLauncherVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_launcher.txt";
-    manager.get(QNetworkRequest(QUrl::fromLocalFile(urlToLauncherVersion)));
+    //urlToLauncherVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_launcher.txt";
+    urlToLauncherVersion = "http://localhost:5000/api/version_launcher";
+    manager.get(QNetworkRequest(QUrl(urlToLauncherVersion)));
 }
 
 QString GameLauncher::GetVersionOfLauncherOnWebsite()
