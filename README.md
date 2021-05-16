@@ -9,4 +9,4 @@
 ### Game Launcher check with web server is there is a new version of the launcher avaliable
 ![alt text](https://i.gyazo.com/97b71e66c11d7e530d4183f05dbf28c3.png)
 
-### I give up using Qt. It's too annoying to work with cross platform application. I'm sticking to Native only. 
+### I give up using Qt. The build system is impossible to use. I would rather just code the application 3 different time for Windows, Mac and Linux than to use Qt again.
