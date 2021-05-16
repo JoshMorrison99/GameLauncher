@@ -107,5 +107,7 @@ private:
     QString urlToLauncher;
     bool isDownloadedVersionNewer;
     bool isDownloadedVersionLauncherNewer;
+    //QString DirectoryLocation = QCoreApplication::applicationDirPath(); // USE FOR RELEASE
+    QString DirectoryLocation = "C:/Users/joshm/OneDrive/Desktop/User"; // USE FOR DEBUG
 };
 #endif // GAMELAUNCHER_H
