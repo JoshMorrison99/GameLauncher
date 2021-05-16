@@ -10,6 +10,9 @@ GameLauncher::GameLauncher(QWidget *parent)
 
     LoadSettings();
 
+    // Check if old Launcher exists
+    DeleteOldLauncherIfExists();
+
     // Update the launcher first
     FetchLauncherVersionNumberFromWebsite();
 
@@ -20,6 +23,15 @@ GameLauncher::GameLauncher(QWidget *parent)
 GameLauncher::~GameLauncher()
 {
     delete ui;
+}
+
+void GameLauncher::DeleteOldLauncherIfExists(){
+    QDir oldLauncher = QDir("C:/Users/joshm/OneDrive/Desktop/User/oldLauncher");
+    if(oldLauncher.exists())
+    {
+        qInfo() << "Old Launcher Exists... Deleting";
+        oldLauncher.removeRecursively();
+    }
 }
 
 void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
@@ -34,9 +46,9 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempGame.zip");
 
     // rename UnityGame.exe to oldGame.exe
-    QFile oldGameFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.zip");
+    QFile oldGameFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/PrimePianistBuilds");
     oldGameFile.open(QIODevice::WriteOnly);
-    oldGameFile.rename("C:/Users/joshm/OneDrive/Desktop/User/oldGame.exe");
+    oldGameFile.rename("C:/Users/joshm/OneDrive/Desktop/User/oldGame");
 
     // rename tempGame.exe to UnityGame.exe
     newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.zip");
@@ -44,15 +56,24 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     // delete oldGame.exe version
     oldGameFile.remove();
 
+    // delete oldGame game folder
+    QDir oldGameFolder = QDir("C:/Users/joshm/OneDrive/Desktop/User/oldGame");
+    oldGameFolder.removeRecursively();
+
     // Unzip
     QProcess p;
     QStringList params;
     QString pythonPath = "C:/Users/joshm/AppData/Local/Microsoft/WindowsApps/PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0/python3.9.exe";
     QString pythonScript = "C:/Users/joshm/OneDrive/Desktop/unzipper.py";
-    params << pythonScript;
+    QString path_to_launcher_zip = "C:/Users/joshm/OneDrive/Desktop/User/UnityGame.zip";
+    QString path_to_destination = "C:/Users/joshm/OneDrive/Desktop/User";
+    params << pythonScript << path_to_launcher_zip << path_to_destination;
     p.start(pythonPath, params);
     p.waitForFinished(-1);
     p.close();
+
+    // Remove Zip file
+    newGameDownloadFile.remove();
 
     // update settings for currently installed game version
     SaveGameVersionInSetting();
@@ -186,20 +207,42 @@ void GameLauncher::LauncherDownloadFinished(QNetworkReply *reply)
     //qInfo() << reply->readAll();
     // Download the new version UnityGame.exe to tempGame.exe
     QByteArray newLauncherDownloadRaw = reply->readAll();
-    QFile newLauncherDownloadFile = QFile("Launcher.exe");
+    QFile newLauncherDownloadFile = QFile("Launcher.zip");
     newLauncherDownloadFile.open(QIODevice::WriteOnly);
     newLauncherDownloadFile.write(newLauncherDownloadRaw);
-    newLauncherDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempLauncher.exe");
+    newLauncherDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempLauncher.zip");
 
     // rename Launcher.exe to oldLauncher.exe
-    QFile oldLauncherFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/Launcher.exe");
-    oldLauncherFile.open(QIODevice::WriteOnly);
-    oldLauncherFile.rename("C:/Users/joshm/OneDrive/Desktop/User/oldLauncher.exe");
+    QDir oldLauncherFile = QDir("C:/Users/joshm/OneDrive/Desktop/User/download_launcher");
+    //oldLauncherFile.open(QIODevice::WriteOnly);
+    oldLauncherFile.rename("C:/Users/joshm/OneDrive/Desktop/User/download_launcher", "C:/Users/joshm/OneDrive/Desktop/User/oldLauncher");
 
     // rename tempLauncher.exe to Launcher.exe
-    newLauncherDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/Launcher.exe");
+    newLauncherDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/Launcher.zip");
 
-    // update settings for currently installed launcher version
+    // delete oldLauncher.exe version
+    //oldLauncherFile.remove();
+
+    // delete oldLauncher folder
+//    QDir oldGameFolder = QDir("C:/Users/joshm/OneDrive/Desktop/User/oldLauncher");
+//    oldGameFolder.removeRecursively();
+
+    // Unzip
+    QProcess p;
+    QStringList params;
+    QString pythonPath = "C:/Users/joshm/AppData/Local/Microsoft/WindowsApps/PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0/python3.9.exe";
+    QString pythonScript = "C:/Users/joshm/OneDrive/Desktop/unzipper.py";
+    QString path_to_launcher_zip = "C:/Users/joshm/OneDrive/Desktop/User/Launcher.zip";
+    QString path_to_destination = "C:/Users/joshm/OneDrive/Desktop/User";
+    params << pythonScript << path_to_launcher_zip << path_to_destination;
+    p.start(pythonPath, params);
+    p.waitForFinished(-1);
+    p.close();
+
+    // Remove Zip file
+    newLauncherDownloadFile.remove();
+
+    // Save
     SaveLauncherVersionInSetting();
 
     // update version gui
@@ -279,7 +322,7 @@ void GameLauncher::on_play_update_button_clicked()
         GetNewerGameVersion();
     }else{
         // Boot up the unity game
-        QDesktopServices::openUrl(QUrl("file:///E:/PrimePianistBuilds/New Unity Project.exe"));
+        QDesktopServices::openUrl(QUrl("file:///C:/Users/joshm/OneDrive/Desktop/User/PrimePianistBuilds/New Unity Project.exe"));
     }
 }
 

@@ -6,6 +6,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QFile>
+#include <QDir>
 #include <QDebug>
 #include <QUrl>
 #include <QSettings>
@@ -81,6 +82,7 @@ private:
     // Launcher Install Logic
     QString GetVersionOfLauncherOnWebsite();
     void UpdateLauncherPrompt();
+    void DeleteOldLauncherIfExists();
 
     // GUI Logic
     void UpdateDownloadUpdateButtonGUI();
