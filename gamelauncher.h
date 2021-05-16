@@ -12,6 +12,7 @@
 #include <QApplication>
 #include <QProcess>
 #include <QDesktopServices>
+#include <QtZlib/zlib.h>
 
 
 #include <update.h>

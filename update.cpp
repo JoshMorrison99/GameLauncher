@@ -16,12 +16,12 @@ Update::~Update()
 
 void Update::on_buttonBox_accepted()
 {
-    qInfo() << "OK";
+    //qDebug() << "OK";
     emit OK();
 }
 
 void Update::on_buttonBox_rejected()
 {
-    qInfo() << "CANCELLED";
+    //qDebug() << "CANCELLED";
     emit UserCancelUpdate();
 }

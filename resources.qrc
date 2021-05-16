@@ -21,5 +21,6 @@
     </qresource>
     <qresource prefix="/files">
         <file>C:/Users/joshm/OneDrive/Desktop/data.json</file>
+        <file>C:/Users/joshm/OneDrive/Desktop/unzipper.py</file>
     </qresource>
 </RCC>

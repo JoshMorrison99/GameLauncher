@@ -34,7 +34,7 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     newGameDownloadFile.rename("C:/Users/joshm/OneDrive/Desktop/User/tempGame.zip");
 
     // rename UnityGame.exe to oldGame.exe
-    QFile oldGameFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.exe");
+    QFile oldGameFile = QFile("C:/Users/joshm/OneDrive/Desktop/User/UnityGame.zip");
     oldGameFile.open(QIODevice::WriteOnly);
     oldGameFile.rename("C:/Users/joshm/OneDrive/Desktop/User/oldGame.exe");
 
@@ -43,6 +43,16 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
 
     // delete oldGame.exe version
     oldGameFile.remove();
+
+    // Unzip
+    QProcess p;
+    QStringList params;
+    QString pythonPath = "C:/Users/joshm/AppData/Local/Microsoft/WindowsApps/PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0/python3.9.exe";
+    QString pythonScript = "C:/Users/joshm/OneDrive/Desktop/unzipper.py";
+    params << pythonScript;
+    p.start(pythonPath, params);
+    p.waitForFinished(-1);
+    p.close();
 
     // update settings for currently installed game version
     SaveGameVersionInSetting();
