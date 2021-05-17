@@ -8,6 +8,8 @@ GameLauncher::GameLauncher(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(QSize(1280, 680));
 
+
+
     LoadSettings();
 
     // Check if old Launcher exists
@@ -61,6 +63,11 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     oldGameFolder.removeRecursively();
 
     qInfo() << QCoreApplication::applicationDirPath();
+    // Create Logs File
+    QFile logs(DirectoryLocation + "/logs.txt");
+    logs.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
+    logs.write(QCoreApplication::applicationDirPath().toUtf8() + '\n');
+    logs.close();
 
     // Unzip
     QProcess p;
