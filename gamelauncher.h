@@ -13,7 +13,8 @@
 #include <QApplication>
 #include <QProcess>
 #include <QDesktopServices>
-#include <QtZlib/zlib.h>
+#include <QStandardPaths>
+#include <JlCompress.h>
 
 
 #include <update.h>
@@ -61,6 +62,12 @@ private slots:
 
     void on_twitter_clicked();
 
+    void on_websiteButton_clicked();
+
+    void on_supportBtn_clicked();
+
+    void on_supportBtn_2_clicked();
+
 private:
     Ui::GameLauncher *ui;
 
@@ -107,8 +114,10 @@ private:
     QString urlToLauncher;
     bool isDownloadedVersionNewer;
     bool isDownloadedVersionLauncherNewer;
-    QString DirectoryLocation = QCoreApplication::applicationDirPath(); // USE FOR RELEASE
-    //QString DirectoryLocation = "C:/Users/joshm/OneDrive/Desktop/User"; // USE FOR DEBUG
+    //QString DirectoryLocation = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1); // USE FOR RELEASE
+    QString DirectoryLocation = "C:/Users/joshm/OneDrive/Desktop/User"; // USE FOR DEBUG
+    //QString URL_to_game_release = "http://primepianist/api/";
+    QString URL_to_game_debug = "http://localhost:5000/api/";
     QFile logs;
 };
 #endif // GAMELAUNCHER_H

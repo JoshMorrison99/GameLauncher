@@ -1,9 +1,9 @@
 QT += core gui
-QT += network networkauth
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -22,13 +22,28 @@ FORMS += \
     gamelauncher.ui \
     update.ui
 
+QUAZIPCODEDIR = "E:/Quazip/quazip-1.1/quazip"
+ZLIBCODEDIR = "E:/Quazip/libs"
+
+
+
+INCLUDEPATH += $${QUAZIPCODEDIR}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+
 RESOURCES += \
     resources.qrc
 
-DISTFILES +=
 
+
+
+
+
+unix|win32: LIBS += -L$$PWD/../../Quazip/libs/ -llibquazip1-qt6.dll
+
+INCLUDEPATH += $$PWD/../../Quazip/libs
+DEPENDPATH += $$PWD/../../Quazip/libs

@@ -18,6 +18,9 @@
     <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/icon_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/icon_00000.png</iconset>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>30</x>
