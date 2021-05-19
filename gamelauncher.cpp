@@ -53,9 +53,7 @@ void GameLauncher::DeleteOldLauncherIfExists(){
 void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "GameDownloadFinished";
-    //qInfo() << reply->readAll();
-    // Download the new version UnityGame.exe to tempGame.exe
-    //if(reply->readAll() != ""){
+
     QByteArray newGameDownloadRaw = reply->readAll();
     QFile newGameDownloadFile("UnityGame.zip");
     newGameDownloadFile.open(QIODevice::WriteOnly);
@@ -77,18 +75,7 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     QDir oldGameFolder = QDir(DirectoryLocation + "/oldGame");
     oldGameFolder.removeRecursively();
 
-//        // Unzip
-//        QProcess p;
-//        QStringList params;
-//        //QString pythonPath = "C:/Users/joshm/AppData/Local/Microsoft/WindowsApps/PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0/python3.9.exe";
-//        QString pythonScript = DirectoryLocation + "/unzipper.exe";
-//        QString path_to_launcher_zip = DirectoryLocation + "/UnityGame.zip";
-//        QString path_to_destination = DirectoryLocation;
-//        params << path_to_launcher_zip << path_to_destination;
-//        p.start(pythonScript, params);
-//        p.waitForFinished(-1);
-//        p.close();
-
+    // Unzip
     QString ZipFile = DirectoryLocation + "/UnityGame.zip";
     QString Directory = DirectoryLocation;
     JlCompress::extractDir(ZipFile, Directory);
@@ -103,7 +90,6 @@ void GameLauncher::GameDownloadFinished(QNetworkReply *reply)
     SetGameVersionNumberGUI();
     isDownloadedVersionNewer = false;
     UpdateDownloadUpdateButtonGUI();
-    //}
 
 
 }
@@ -226,54 +212,22 @@ void GameLauncher::LauncherDownloadProgress(qint64 bytesReceived, qint64 bytesTo
 void GameLauncher::LauncherDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "LauncherDownloadFinished";
-    //qInfo() << reply->readAll();
+
     // Download the new version UnityGame.exe to tempGame.exe
     QByteArray newLauncherDownloadRaw = reply->readAll();
     QFile newLauncherDownloadFile("Launcher.zip");
     newLauncherDownloadFile.open(QIODevice::WriteOnly);
     newLauncherDownloadFile.write(newLauncherDownloadRaw);
-    newLauncherDownloadFile.rename(DirectoryLocation + "/tempLauncher.zip");
-
-    // rename Launcher.exe to oldLauncher.exe
-    QDir oldLauncherFile = QDir(DirectoryLocation + "/download_launcher");
-    //oldLauncherFile.open(QIODevice::WriteOnly);
-    oldLauncherFile.rename(DirectoryLocation + "/download_launcher", DirectoryLocation + "/oldLauncher");
-
-    // rename Launcher.exe to oldLauncher.exe
-    QFile oldLauncherExecutable(DirectoryLocation + "/GameLauncher.exe");
-    //oldLauncherFile.open(QIODevice::WriteOnly);
-    oldLauncherExecutable.rename(DirectoryLocation + "/oldGameLauncher.exe");
-
-    // rename tempLauncher.exe to Launcher.exe
     newLauncherDownloadFile.rename(DirectoryLocation + "/Launcher.zip");
 
-
-
-    // delete oldLauncher.exe version
-    //oldLauncherFile.remove();
-
-    // delete oldLauncher folder
-//    QDir oldGameFolder = QDir("C:/Users/joshm/OneDrive/Desktop/User/oldLauncher");
-//    oldGameFolder.removeRecursively();
-
-    QString ZipFile = DirectoryLocation + "/Launcher.zip";
-    QString Directory = DirectoryLocation;
+    // rename GameLauncher.exe to oldLauncher.exe
+    QFile oldLauncherExecutable(DirectoryLocation + "/Prime Pianist.exe");
+    oldLauncherExecutable.rename(DirectoryLocation + "/oldGameLauncher.exe");
 
     // Unzip
-//    QProcess p;
-//    QStringList params;
-//    //QString pythonPath = "C:/Users/joshm/AppData/Local/Microsoft/WindowsApps/PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0/python3.9.exe";
-//    QString pythonScript = DirectoryLocation + "/unzipper.exe";
-//    QString path_to_launcher_zip = DirectoryLocation + "/Launcher.zip";
-//    QString path_to_destination = DirectoryLocation;
-//    params << path_to_launcher_zip << path_to_destination;
-//    p.start(pythonScript, params);
-//    p.waitForFinished(-1);
-//    p.close();
-
-    // extract gamelauncher.exe out of download_launcher
-    QFile extractNewLauncher(DirectoryLocation + "/download_launcher/GameLauncher.exe");
-    extractNewLauncher.rename(DirectoryLocation + "/GameLauncher.exe");
+    QString ZipFile = DirectoryLocation + "/Launcher.zip";
+    QString Directory = DirectoryLocation;
+    JlCompress::extractDir(ZipFile, Directory);
 
     // Remove Zip file
     newLauncherDownloadFile.remove();
@@ -295,7 +249,6 @@ void GameLauncher::GetNewerGameVersion()
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameDownloadFinished);
 
     // Download the actual unity game
-    //urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/UnityGame.exe";
     urlToGame = URL_to_game_debug + "download_game";
     QNetworkRequest request = QNetworkRequest(QUrl(urlToGame));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
@@ -327,14 +280,10 @@ void GameLauncher::LoadSettings()
     QSettings settings(COMPANY, APPLICATION);
 
     // GAME
-    //settings.setValue("version_game", "0.0.0"); //DEBUGGIN
     gameVersionSystem = settings.value("version_game").toString();
-    //ui->versionGameLabel->setText(settings.value("version_game").toString());
 
     // LAUNCHER
-    //settings.setValue("version_launcher", "0.0.0"); //DEBUGGIN
     launcherVersionSystem = settings.value("version_launcher").toString();
-    //ui->versionLauncherNumber->setText(settings.value("version_launcher").toString());
 }
 
 void GameLauncher::SaveGameVersionInSetting()
@@ -369,7 +318,6 @@ void GameLauncher::FetchGameVersionNumberFromWebsite()
     qInfo() << "FetchGameVersionNumberFromWebsite";
     qInfo() << &manager;
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameVersionDownloadFinished);
-    //urlToGameVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_game.txt";
     urlToGameVersion = URL_to_game_debug + "version_game";
     qInfo() << urlToGameVersion;
     QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(urlToGameVersion)));
@@ -382,9 +330,6 @@ void GameLauncher::GameVersionDownloadFinished(QNetworkReply *reply)
     qInfo() << "GameVersionDownloadFinished";
     gameVersionDownload = reply->readAll();
     QSettings settings(COMPANY, APPLICATION);
-    //qInfo() << "Game Version: " << gameVersionDownload;
-    //settings.setValue("version_game", GetVersionOfGameOnWebsite());
-    //SetGameVersionNumberGUI();
 
 
     disconnect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameVersionDownloadFinished);
@@ -402,7 +347,6 @@ QString GameLauncher::GetVersionOfGameOnWebsite()
 void GameLauncher::FetchLauncherVersionNumberFromWebsite()
 {
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherVersionDownloadFinished);
-    //urlToLauncherVersion = "C:/Users/joshm/OneDrive/Desktop/Server/version_launcher.txt";
     urlToLauncherVersion = URL_to_game_debug + "version_launcher";
     qInfo() << urlToLauncherVersion;
     manager.get(QNetworkRequest(QUrl(urlToLauncherVersion)));
@@ -417,7 +361,6 @@ QString GameLauncher::GetVersionOfLauncherOnWebsite()
 void GameLauncher::UpdateLauncherPrompt()
 {
     qInfo() << "Update Launcher";
-    // TODO: Add a prompt that the user can choose to update the launcher or not
 
     updateWindow.setModal(true);
     updateWindow.exec();
@@ -429,19 +372,13 @@ void GameLauncher::LauncherVersionDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "LauncherVersionDownloadFinished";
     launcherVersionDownload = reply->readAll();
-    //qInfo() << reply->readAll();
     qInfo() << "EQUAL TO NULL";
-    //if(reply->readAll() != ""){
     qInfo() << "NOT EQUAL TO NULL";
     QSettings settings(COMPANY, APPLICATION);
-    //qInfo() << "Launcher Version: " << launcherVersionDownload;
-    //settings.setValue("version_launcher", GetVersionOfLauncherOnWebsite());
-    //SetLauncherVersionNumberGUI();
 
     disconnect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherVersionDownloadFinished);
 
     isLauncherVersionDownloadedNewer();
-    //}
 }
 
 

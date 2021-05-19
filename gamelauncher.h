@@ -22,6 +22,7 @@
 #define COMPANY "Shelledware"
 #define APPLICATION "Prime Pianist"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameLauncher; }
 QT_END_NAMESPACE
