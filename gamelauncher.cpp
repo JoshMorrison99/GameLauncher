@@ -12,6 +12,10 @@ GameLauncher::GameLauncher(QWidget *parent)
 
     LoadSettings();
 
+    // set ui
+    SetLauncherVersionNumberGUI();
+    SetGameVersionNumberGUI();
+
     // Check if old Launcher exists
     DeleteOldLauncherIfExists();
 
@@ -184,8 +188,7 @@ void GameLauncher::UpdateLauncher()
 {
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherDownloadFinished);
     // download the updated launcher
-    //urlToGame = "C:/Users/joshm/OneDrive/Desktop/Server/Launcher.exe";
-    urlToGame = URL_to_game_debug + "download_launcher";
+    urlToGame = URL_to_game_release + "download_launcher";
     QNetworkRequest request = QNetworkRequest(QUrl(urlToGame));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
     QNetworkReply *reply = manager.get(request);
@@ -249,7 +252,7 @@ void GameLauncher::GetNewerGameVersion()
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameDownloadFinished);
 
     // Download the actual unity game
-    urlToGame = URL_to_game_debug + "download_game";
+    urlToGame = URL_to_game_release + "download_game";
     QNetworkRequest request = QNetworkRequest(QUrl(urlToGame));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
     QNetworkReply *reply = manager.get(request);
@@ -318,7 +321,7 @@ void GameLauncher::FetchGameVersionNumberFromWebsite()
     qInfo() << "FetchGameVersionNumberFromWebsite";
     qInfo() << &manager;
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::GameVersionDownloadFinished);
-    urlToGameVersion = URL_to_game_debug + "version_game";
+    urlToGameVersion = URL_to_game_release + "version_game";
     qInfo() << urlToGameVersion;
     QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(urlToGameVersion)));
     qInfo() << &manager;
@@ -347,7 +350,7 @@ QString GameLauncher::GetVersionOfGameOnWebsite()
 void GameLauncher::FetchLauncherVersionNumberFromWebsite()
 {
     connect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherVersionDownloadFinished);
-    urlToLauncherVersion = URL_to_game_debug + "version_launcher";
+    urlToLauncherVersion = URL_to_game_release + "version_launcher";
     qInfo() << urlToLauncherVersion;
     manager.get(QNetworkRequest(QUrl(urlToLauncherVersion)));
 }
@@ -372,8 +375,6 @@ void GameLauncher::LauncherVersionDownloadFinished(QNetworkReply *reply)
 {
     qInfo() << "LauncherVersionDownloadFinished";
     launcherVersionDownload = reply->readAll();
-    qInfo() << "EQUAL TO NULL";
-    qInfo() << "NOT EQUAL TO NULL";
     QSettings settings(COMPANY, APPLICATION);
 
     disconnect(&manager, &QNetworkAccessManager::finished, this, &GameLauncher::LauncherVersionDownloadFinished);

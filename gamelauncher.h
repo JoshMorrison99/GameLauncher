@@ -115,10 +115,10 @@ private:
     QString urlToLauncher;
     bool isDownloadedVersionNewer;
     bool isDownloadedVersionLauncherNewer;
-    //QString DirectoryLocation = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1); // USE FOR RELEASE
-    QString DirectoryLocation = "C:/Users/joshm/OneDrive/Desktop/User"; // USE FOR DEBUG
-    //QString URL_to_game_release = "http://primepianist/api/";
-    QString URL_to_game_debug = "http://localhost:5000/api/";
+    QString DirectoryLocation = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1); // USE FOR RELEASE
+    //QString DirectoryLocation = "C:/Users/joshm/OneDrive/Desktop/User"; // USE FOR DEBUG
+    QString URL_to_game_release = "http://primepianist.com/api/";
+    //QString URL_to_game_debug = "http://localhost:5000/api/";
     QFile logs;
 };
 #endif // GAMELAUNCHER_H

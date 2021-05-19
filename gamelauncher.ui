@@ -118,7 +118,7 @@
      <string notr="true">color: #424242;</string>
     </property>
     <property name="text">
-     <string>1.0.0</string>
+     <string>0.0.1</string>
     </property>
    </widget>
    <widget class="QLabel" name="versionGameLabel">
@@ -139,7 +139,7 @@
      <string notr="true">color: rgba(255,255,255,50);</string>
     </property>
     <property name="text">
-     <string>0.0.69</string>
+     <string>0.0.1</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
