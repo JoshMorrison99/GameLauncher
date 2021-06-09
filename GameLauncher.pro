@@ -11,16 +11,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    gamelauncher.cpp \
-    update.cpp
+    gamelauncher.cpp
 
 HEADERS += \
-    gamelauncher.h \
-    update.h
+    gamelauncher.h
 
 FORMS += \
-    gamelauncher.ui \
-    update.ui
+    gamelauncher.ui
 
 QUAZIPCODEDIR = "E:/Quazip/quazip-1.1/quazip"
 ZLIBCODEDIR = "E:/Quazip/libs"

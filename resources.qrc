@@ -1,25 +1,15 @@
 <RCC>
     <qresource prefix="/images">
-        <file>C:/Users/joshm/OneDrive/Desktop/bg.jpg</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/icon_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/discord_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/discord_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/home_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/home_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/instagram_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/instagram_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/logs_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/logs_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/setting_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/setting_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/support_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/support_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/twitter_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/twitter_white_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/youtube_black_00000.png</file>
-        <file>C:/Users/joshm/OneDrive/Desktop/LauncherImages/youtube_white_00000.png</file>
+        <file>resources/discord_white</file>
+        <file>resources/home_white</file>
+        <file>resources/instagram_white</file>
+        <file>resources/logs_white</file>
+        <file>resources/support_white</file>
+        <file>resources/twitter_white</file>
+        <file>resources/youtube_white</file>
+        <file>resources/Background</file>
+        <file>resources/icon</file>
+        <file>resources/background2</file>
     </qresource>
-    <qresource prefix="/files">
-        <file>C:/Users/joshm/OneDrive/Desktop/data.json</file>
-    </qresource>
+    <qresource prefix="/files"/>
 </RCC>

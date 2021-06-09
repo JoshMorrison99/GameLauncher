@@ -15,10 +15,13 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/icon_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/icon_00000.png</iconset>
+    <normaloff>:/images/resources/icon</normaloff>:/images/resources/icon</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="background">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>-50</x>
@@ -28,10 +31,16 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #424242;</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(169, 152, 116, 255), stop:0.837925 rgba(0, 0, 0, 255));</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/images/resources/background2</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="TopBar">
@@ -48,25 +57,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="image_background">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1281</width>
-      <height>671</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/C:/Users/joshm/OneDrive/Desktop/bg.jpg</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="play_update_button">
@@ -95,30 +85,6 @@
     </property>
     <property name="text">
      <string>Play</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="versionLauncherNumber">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>642</y>
-      <width>61</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>8</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #424242;</string>
-    </property>
-    <property name="text">
-     <string>0.0.1</string>
     </property>
    </widget>
    <widget class="QLabel" name="versionGameLabel">
@@ -223,7 +189,7 @@ color: white;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/home_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/home_white_00000.png</iconset>
+         <normaloff>:/images/resources/home_white</normaloff>:/images/resources/home_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -266,7 +232,7 @@ color: white;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/support_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/support_white_00000.png</iconset>
+         <normaloff>:/images/resources/support_white</normaloff>:/images/resources/support_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -309,7 +275,7 @@ color: white;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/logs_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/logs_white_00000.png</iconset>
+         <normaloff>:/images/resources/logs_white</normaloff>:/images/resources/logs_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -368,7 +334,7 @@ border: 0px solid black;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/discord_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/discord_white_00000.png</iconset>
+         <normaloff>:/images/resources/discord_white</normaloff>:/images/resources/discord_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -410,7 +376,7 @@ border: 0px solid black;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/youtube_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/youtube_white_00000.png</iconset>
+         <normaloff>:/images/resources/youtube_white</normaloff>:/images/resources/youtube_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -452,7 +418,7 @@ border: 0px solid black;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/instagram_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/instagram_white_00000.png</iconset>
+         <normaloff>:/images/resources/instagram_white</normaloff>:/images/resources/instagram_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -494,7 +460,7 @@ border: 0px solid black;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/twitter_white_00000.png</normaloff>:/images/C:/Users/joshm/OneDrive/Desktop/LauncherImages/twitter_white_00000.png</iconset>
+         <normaloff>:/images/resources/twitter_white</normaloff>:/images/resources/twitter_white</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -539,8 +505,27 @@ QProgressBar::chunk {
      <number>0</number>
     </property>
    </widget>
+   <widget class="QLabel" name="background2">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>-20</y>
+      <width>1301</width>
+      <height>721</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(33, 33, 33)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>background2</zorder>
    <zorder>background</zorder>
-   <zorder>image_background</zorder>
    <zorder>TopBar</zorder>
    <zorder>verticalLayoutWidget</zorder>
    <zorder>horizontalLayoutWidget_2</zorder>
@@ -548,7 +533,6 @@ QProgressBar::chunk {
    <zorder>play_update_button</zorder>
    <zorder>progressBar</zorder>
    <zorder>versionGameLabel</zorder>
-   <zorder>versionLauncherNumber</zorder>
   </widget>
  </widget>
  <resources>
